@@ -1,0 +1,86 @@
+# ==========================================
+# Ambientes Virtuais Python
+# ==========================================
+venv/
+env/
+ENV/
+.venv/
+
+# ==========================================
+# Artefatos do Python e Caches
+# ==========================================
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.python-version
+
+# ==========================================
+# Modelo e Arquivos de Configuração pesados
+# (Ignore para evitar versionar binários grandes no Git)
+# ==========================================
+*.keras
+*.h5
+*.pb
+*.onnx
+*.tflite
+config.json
+config_modelo.json
+
+# Se quiser salvar um config de exemplo no repositório,
+# descomente a linha abaixo e crie o arquivo config.example.json:
+# !config.example.json
+
+# ==========================================
+# Arquivos Temporários de Áudio/Mídia e Logs
+# ==========================================
+*.wav
+*.mp3
+*.mp4
+*.m4a
+*.ogg
+*.flac
+*.aac
+/tmp/
+temp/
+*.log
+
+# ==========================================
+# IDEs e Editores de Código
+# ==========================================
+# VS Code
+.vscode/
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+# PyCharm / JetBrains
+.idea/
+
+# Vim / Emacs
+*.swp
+*~
+
+# ==========================================
+# Sistemas Operacionais
+# ==========================================
+# Linux
+.directory
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSSharedFileList
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# ==========================================
+# Docker / Testes / Cobertura (Se utilizar no futuro)
+# ==========================================
+.pytest_cache/
+.coverage
+htmlcov/
