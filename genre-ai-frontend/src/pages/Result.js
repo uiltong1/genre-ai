@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import {
   BarChart,
@@ -29,8 +30,13 @@ function Result() {
   const navigate = useNavigate();
   const result = location.state?.result;
 
+  useEffect(() => {
+    if (!result) {
+      navigate('/');
+    }
+  }, [result, navigate]);
+
   if (!result) {
-    navigate('/');
     return null;
   }
 
