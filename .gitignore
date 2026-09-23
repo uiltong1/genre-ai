@@ -84,3 +84,14 @@ Desktop.ini
 .pytest_cache/
 .coverage
 htmlcov/
+
+# ==========================================
+# Node.js / JavaScript / TypeScript (Se utilizar no futuro)
+# ==========================================
+node_modules/
+build/
+dist/
+.env
+.env.local
+*.log
+.DS_Store

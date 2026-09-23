@@ -1,14 +1,22 @@
-version: '3.8'
-
 services:
-  api:
+  frontend:
     build:
-      context: ./genre-ai-api
+      context: ./genre-ai-frontend
       dockerfile: Dockerfile
-    container_name: genre_ai_api
     ports:
-      - "8000:8000"
+      - "3000:3000"
+    volumes:
+      - ./genre-ai-frontend/src:/app/src
+      - ./genre-ai-frontend/public:/app/public
+      - ./genre-ai-frontend/tailwind.config.js:/app/tailwind.config.js
+      - ./genre-ai-frontend/postcss.config.js:/app/postcss.config.js
+    env_file:
+      - ./genre-ai-frontend/.env
     environment:
-      - MODEL_URL=https://huggingface.co/uiltong1/generos-musicais-cnn/resolve/main/modelo_generos_musicais.keras
-      - CONFIG_URL=https://huggingface.co/uiltong1/generos-musicais-cnn/resolve/main/config_modelo.json
+      - CHOKIDAR_USEPOLLING=true
+      - WATCHPACK_POLLING=true
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    stdin_open: true
+    tty: true
     restart: unless-stopped
