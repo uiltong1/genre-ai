@@ -1,9 +1,15 @@
+import os
 from contextlib import asynccontextmanager
 from fastapi import FastAPI, UploadFile, File
 
 from models.config_model import ModelConfig
 from models.schemas.predict_schema import PredictResponseSchema
 from controllers.predict_controller import PredictController
+
+from models.schemas.predict_schema import PredictResponseSchema
+from controllers.predict_controller import PredictController
+
+from services.http_model_downloader_service import HttpModelDownloaderService
 from services.config_loader_service import JsonConfigLoaderService
 from services.audio_converter_service import PydubAudioConverterService
 from services.audio_processor_service import LibrosaAudioProcessorService
@@ -15,17 +21,42 @@ class Container:
     predict_controller: PredictController = None
 
 
+MODEL_URL = os.getenv(
+    "MODEL_URL",
+    "https://huggingface.co/seu-usuario/generos-musicais-cnn/resolve/main/modelo_generos_musicais.keras"
+)
+CONFIG_URL = os.getenv(
+    "CONFIG_URL",
+    "https://huggingface.co/seu-usuario/generos-musicais-cnn/resolve/main/config.json"
+)
+
+MODEL_LOCAL_PATH = "modelo_generos_musicais.keras"
+CONFIG_LOCAL_PATH = "config.json"
+
+
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    print("Inicializando container de dependências...")
+    print("🚀 Inicializando servidor e dependências...")
 
+    # 1. Garante que o modelo e config estejam baixados
+    downloader = HttpModelDownloaderService(
+        model_url=MODEL_URL,
+        config_url=CONFIG_URL
+    )
+    downloader.ensure_model_files(
+        model_path=MODEL_LOCAL_PATH,
+        config_path=CONFIG_LOCAL_PATH
+    )
+
+    # 2. Carrega as configurações e inicializa os serviços de ML
     config_loader = JsonConfigLoaderService()
-    Container.config = config_loader.load_config("config.json")
+    Container.config = config_loader.load_config(CONFIG_LOCAL_PATH)
 
     converter = PydubAudioConverterService()
     processor = LibrosaAudioProcessorService()
-    classifier = KerasGenreClassifierService("modelo_generos_musicais.keras")
+    classifier = KerasGenreClassifierService(MODEL_LOCAL_PATH)
 
+    # 3. Injeta as dependências no Controller
     Container.predict_controller = PredictController(
         converter=converter,
         processor=processor,
@@ -33,15 +64,15 @@ async def lifespan(app: FastAPI):
         config=Container.config,
     )
 
-    print("✅ Serviços, Controllers e Schemas prontos!")
+    print("✅ Servidor pronto para receber requisições!")
     yield
     print("Encerrando a aplicação...")
 
 
 app = FastAPI(
     title="API de Classificação de Gêneros Musicais",
-    description="Arquitetura limpa com SOLID, separação de Controllers, Services, Domain e Schemas Pydantic.",
-    version="2.2.0",
+    description="API desacoplada com download automático de modelo remoto.",
+    version="2.3.0",
     lifespan=lifespan,
 )
 
@@ -49,8 +80,8 @@ app = FastAPI(
 @app.get("/")
 def home():
     return {
-        "status": "Ok",
-        "message": "API de Classificação de Gêneros Musicais está funcionando!",
+        "status": "online",
+        "message": "Envie um arquivo para POST /predict para classificar o gênero.",
     }
 
 

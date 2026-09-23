@@ -21,6 +21,7 @@ class PredictController:
         ".flac",
         ".m4a",
         ".aac",
+        ".mkv"
     }
 
     def __init__(
