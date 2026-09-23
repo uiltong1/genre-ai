@@ -2,8 +2,8 @@ import os
 import numpy as np
 import tensorflow as tf
 from interfaces.igenre_classifier import IGenreClassifier
-from models.domain.config_model import ModelConfig
-from models.domain.prediction_model import PredictionResult
+from models.config_model import ModelConfig
+from models.prediction_model import PredictionResult
 
 
 class KerasGenreClassifierService(IGenreClassifier):

@@ -1,7 +1,7 @@
 from abc import ABC, abstractmethod
 import numpy as np
-from models.domain.config_model import ModelConfig
-from models.domain.prediction_model import PredictionResult
+from models.config_model import ModelConfig
+from models.prediction_model import PredictionResult
 
 
 class IGenreClassifier(ABC):

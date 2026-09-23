@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 import numpy as np
-from models.domain.config_model import ModelConfig
+from models.config_model import ModelConfig
 
 
 class IAudioProcessor(ABC):

@@ -1,7 +1,7 @@
 import json
 import os
 from interfaces.iconfig_loader import IConfigLoader
-from models.domain.config_model import ModelConfig
+from models.config_model import ModelConfig
 
 
 class JsonConfigLoaderService(IConfigLoader):

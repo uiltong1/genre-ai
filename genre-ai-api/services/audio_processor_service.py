@@ -1,7 +1,7 @@
 import librosa
 import numpy as np
 from interfaces.iaudio_processor import IAudioProcessor
-from models.domain.config_model import ModelConfig
+from models.config_model import ModelConfig
 
 
 class LibrosaAudioProcessorService(IAudioProcessor):

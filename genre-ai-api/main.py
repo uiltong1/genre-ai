@@ -1,7 +1,7 @@
 from contextlib import asynccontextmanager
 from fastapi import FastAPI, UploadFile, File
 
-from models.domain.config_model import ModelConfig
+from models.config_model import ModelConfig
 from models.schemas.predict_schema import PredictResponseSchema
 from controllers.predict_controller import PredictController
 from services.config_loader_service import JsonConfigLoaderService

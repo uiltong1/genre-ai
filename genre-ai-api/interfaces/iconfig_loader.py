@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from models.domain.config_model import ModelConfig
+from models.config_model import ModelConfig
 
 
 class IConfigLoader(ABC):
