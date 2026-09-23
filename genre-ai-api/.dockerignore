@@ -1,0 +1,13 @@
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+env/
+.git/
+.gitignore
+*.keras
+*.json
+*.wav
+*.mp3
+*.mp4

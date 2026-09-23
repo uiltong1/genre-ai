@@ -20,19 +20,17 @@ class Container:
     config: ModelConfig = None
     predict_controller: PredictController = None
 
+MODEL_LOCAL_PATH = "modelo_generos_musicais.keras"
+CONFIG_LOCAL_PATH = "config_modelo.json"
 
 MODEL_URL = os.getenv(
     "MODEL_URL",
-    "https://huggingface.co/seu-usuario/generos-musicais-cnn/resolve/main/modelo_generos_musicais.keras"
+    "https://huggingface.co/uiltong1/generos-musicais-cnn/resolve/main/modelo_generos_musicais.keras"
 )
 CONFIG_URL = os.getenv(
     "CONFIG_URL",
-    "https://huggingface.co/seu-usuario/generos-musicais-cnn/resolve/main/config.json"
+    "https://huggingface.co/uiltong1/generos-musicais-cnn/resolve/main/config_modelo.json"
 )
-
-MODEL_LOCAL_PATH = "modelo_generos_musicais.keras"
-CONFIG_LOCAL_PATH = "config.json"
-
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):

@@ -1,0 +1,14 @@
+version: '3.8'
+
+services:
+  api:
+    build:
+      context: ./genre-ai-api
+      dockerfile: Dockerfile
+    container_name: genre_ai_api
+    ports:
+      - "8000:8000"
+    environment:
+      - MODEL_URL=https://huggingface.co/uiltong1/generos-musicais-cnn/resolve/main/modelo_generos_musicais.keras
+      - CONFIG_URL=https://huggingface.co/uiltong1/generos-musicais-cnn/resolve/main/config_modelo.json
+    restart: unless-stopped
