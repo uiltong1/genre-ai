@@ -6,7 +6,7 @@
 
 O **Genre AI** permite que usuários enviem arquivos de áudio ou vídeo para identificar automaticamente o gênero musical predominante (entre 10 categorias). A API realiza o pré-processamento do sinal de áudio, divide a faixa em segmentos temporais, gera Mel-espectrogramas e alimenta um modelo de Rede Neural Convolucional (CNN) para calcular a probabilidade de cada gênero.
 
-## 🛠️ Tecnologias Utilizadas
+## Tecnologias Utilizadas
 
 - **Backend:** Python 3.11, FastAPI, Uvicorn, Pydantic
 - **Machine Learning & Audio:** TensorFlow/Keras, Librosa, Pydub, NumPy
