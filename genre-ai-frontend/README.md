@@ -1,70 +1,61 @@
-# Getting Started with Create React App
+# Genre AI — Frontend
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+React 19 + Create React App + Tailwind CSS. Classifica gêneros musicais enviando áudio para a API.
 
-## Available Scripts
+Documentação completa do projeto (roda, envs, testes backend + frontend): ver [README na raiz](../README.md).
 
-In the project directory, you can run:
+## Variáveis de ambiente
 
-### `npm start`
+Copie o example antes de rodar:
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+```bash
+cp .env.example .env
+```
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+| Arquivo | Quando carrega | Commitado? |
+|---|---|---|
+| `.env.example` | referência | Sim |
+| `.env` | `npm start` / Docker | Não (gitignored) |
+| `.env.test` | `npm test` / `npm run test:ci` | Sim |
+| `.env.local`, `.env.test.local` | sobrescreve os anteriores | Não |
 
-### `npm test`
+| Variável | Descrição |
+|---|---|
+| `REACT_APP_API_HOST` | Host da API no proxy do dev server (`src/setupProxy.js`) |
+| `REACT_APP_N8N_AUTH` | Opcional, token n8n (não usado pelo código atual) |
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Scripts
 
-### `npm run build`
+```bash
+npm install
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+npm start         # dev server -> http://localhost:3000
+npm run build     # build de produção em build/
+npm test          # Jest em watch mode
+npm run test:ci   # Jest uma vez (CI)
+npx eslint src/   # lint
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Testes com cobertura
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```bash
+CI=true npm test -- --coverage --watchAll=false
+```
 
-### `npm run eject`
+- `src/setupTests.js` — jest-dom, polyfills e mock global de `fetch`
+- 13 testes: `App.test.js`, `pages/Analyze.test.js`, `pages/Result.test.js`
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## Rotas
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+| Rota | Página |
+|---|---|
+| `/` | Upload (`Analyze`) |
+| `/result` | Resultado (`Result`) — requer `location.state.result` |
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## Docker
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+```bash
+# na raiz do projeto
+cp genre-ai-frontend/.env.example genre-ai-frontend/.env
+docker compose up --build
+```
