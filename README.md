@@ -61,7 +61,6 @@ genre-ai/
 | Node.js | 18+ |
 | npm | 9+ |
 | ffmpeg | qualquer (necessário para converter áudios que não sejam `.wav`) |
-| Docker + Docker Compose *(opcional)* | para rodar o frontend em container |
 
 ---
 
