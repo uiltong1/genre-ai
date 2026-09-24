@@ -92,7 +92,6 @@ Criar `genre-ai-frontend/.env` a partir de `genre-ai-frontend/.env.example`:
 | Variável | Obrigatória | Descrição | Default |
 |---|---|---|---|
 | `REACT_APP_API_HOST` | Sim | Host da API usado pelo proxy do dev server (`src/setupProxy.js`) | `http://host.docker.internal:8000` no código |
-| `REACT_APP_N8N_AUTH` | Não | Token n8n (hoje não é lido pelo código do app) | vazio |
 
 ```bash
 cd genre-ai-frontend
